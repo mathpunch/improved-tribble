@@ -10,12 +10,14 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #f0f0f0;
             font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
         }
         #code-form {
             text-align: center;
-            background: white;
+            background: var(--form-bg-color);
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -27,6 +29,8 @@
             width: 80%;
             border: 1px solid #ccc;
             border-radius: 5px;
+            background-color: var(--input-bg-color);
+            color: var(--input-text-color);
         }
         button {
             font-size: 18px;
@@ -37,6 +41,24 @@
             border-radius: 5px;
             cursor: pointer;
         }
+        button#toggle-dark-mode {
+            margin-top: 20px;
+            background-color: #555;
+        }
+        :root {
+            --bg-color: #f0f0f0;
+            --text-color: #000;
+            --form-bg-color: #fff;
+            --input-bg-color: #fff;
+            --input-text-color: #000;
+        }
+        .dark-mode {
+            --bg-color: #121212;
+            --text-color: #fff;
+            --form-bg-color: #1e1e1e;
+            --input-bg-color: #333;
+            --input-text-color: #fff;
+        }
     </style>
 </head>
 <body>
@@ -45,12 +67,14 @@
         <input type="text" id="code" maxlength="4" placeholder="Enter code" />
         <br>
         <button onclick="checkCode()">Submit</button>
+        <br>
+        <button id="toggle-dark-mode" onclick="toggleDarkMode()">Toggle Dark Mode</button>
     </div>
 
     <script>
         const correctCode = "4365";
         const maxAttempts = 10;
-        
+
         function checkCode() {
             let attempts = parseInt(localStorage.getItem("failedAttempts")) || 0;
 
@@ -79,9 +103,17 @@
             document.body.innerHTML = "<h1>You are permanently banned from this site.</h1>";
         }
 
-        // Check if already banned on page load
+        function toggleDarkMode() {
+            document.body.classList.toggle("dark-mode");
+            localStorage.setItem("darkMode", document.body.classList.contains("dark-mode"));
+        }
+
         if (localStorage.getItem("banned") === "true") {
             document.body.innerHTML = "<h1>You are permanently banned from this site.</h1>";
+        }
+
+        if (localStorage.getItem("darkMode") === "true") {
+            document.body.classList.add("dark-mode");
         }
     </script>
 </body>
