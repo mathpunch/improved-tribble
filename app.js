@@ -1,1 +1,0 @@
-(function(){var _0x73f4x1=document.getElementById("code").value,_0x73f4x2="4687";_0x73f4x1===_0x73f4x2?window.location.href="https://live.on.cybertv.tv/embed.html#https://nowgg.lol":alert("Incorrect code.")})();
