@@ -12,25 +12,25 @@
             height: 100vh;
             font-family: Arial, sans-serif;
             margin: 0;
-            background-color: var(--bg-color);
-            color: var(--text-color);
+            background-color: #121212;
+            color: #fff;
         }
         #code-form {
             text-align: center;
-            background: var(--form-bg-color);
+            background: #1e1e1e;
             padding: 20px;
             border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
         }
         input[type="text"] {
             font-size: 18px;
             padding: 10px;
             margin: 10px 0;
             width: 80%;
-            border: 1px solid #ccc;
+            border: 1px solid #555;
             border-radius: 5px;
-            background-color: var(--input-bg-color);
-            color: var(--input-text-color);
+            background-color: #333;
+            color: #fff;
         }
         button {
             font-size: 18px;
@@ -41,23 +41,10 @@
             border-radius: 5px;
             cursor: pointer;
         }
-        button#toggle-dark-mode {
-            margin-top: 20px;
-            background-color: #555;
-        }
-        :root {
-            --bg-color: #f0f0f0;
-            --text-color: #000;
-            --form-bg-color: #fff;
-            --input-bg-color: #fff;
-            --input-text-color: #000;
-        }
-        .dark-mode {
-            --bg-color: #121212;
-            --text-color: #fff;
-            --form-bg-color: #1e1e1e;
-            --input-bg-color: #333;
-            --input-text-color: #fff;
+        .ban-message {
+            text-align: center;
+            color: #ff4d4d;
+            font-size: 24px;
         }
     </style>
 </head>
@@ -67,8 +54,6 @@
         <input type="text" id="code" maxlength="4" placeholder="Enter code" />
         <br>
         <button onclick="checkCode()">Submit</button>
-        <br>
-        <button id="toggle-dark-mode" onclick="toggleDarkMode()">Toggle Dark Mode</button>
     </div>
 
     <script>
@@ -98,22 +83,13 @@
         }
 
         function banUser() {
-            alert("You have been banned from accessing this website.");
+            document.body.innerHTML = '<div class="ban-message">You are permanently banned from this site.</div>';
             localStorage.setItem("banned", "true");
-            document.body.innerHTML = "<h1>You are permanently banned from this site.</h1>";
         }
 
-        function toggleDarkMode() {
-            document.body.classList.toggle("dark-mode");
-            localStorage.setItem("darkMode", document.body.classList.contains("dark-mode"));
-        }
-
+        // Check if already banned on page load
         if (localStorage.getItem("banned") === "true") {
-            document.body.innerHTML = "<h1>You are permanently banned from this site.</h1>";
-        }
-
-        if (localStorage.getItem("darkMode") === "true") {
-            document.body.classList.add("dark-mode");
+            document.body.innerHTML = '<div class="ban-message">You are permanently banned from this site.</div>';
         }
     </script>
 </body>
