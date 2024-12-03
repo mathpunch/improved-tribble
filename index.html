@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Code Entry</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1-crypto-js.min.js"></script>
     <style>
         body {
             display: flex;
@@ -57,7 +58,7 @@
     </div>
 
     <script>
-        const correctCode = "4365";
+        const correctCodeHash = CryptoJS.SHA256("4687").toString(); // Hashed new code
         const maxAttempts = 10;
 
         function checkCode() {
@@ -69,7 +70,9 @@
             }
 
             const enteredCode = document.getElementById("code").value;
-            if (enteredCode === correctCode) {
+            const enteredCodeHash = CryptoJS.SHA256(enteredCode).toString(); // Hash the entered code
+
+            if (enteredCodeHash === correctCodeHash) {
                 window.location.href = "https://live.on.cybertv.tv/embed.html#https://nowgg.lol";
             } else {
                 attempts++;
